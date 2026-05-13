@@ -9,13 +9,13 @@ import lookbookImg from "@/assets/lookbook.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Pitch-Side — World Cup Jerseys, Worn by Champions" },
+      { title: "Kickoff Nagaland — World Cup Jerseys, Worn by Champions" },
       {
         name: "description",
         content:
           "Premium World Cup national team jerseys. Authentic match-grade silhouettes from Argentina, Brazil, France, Japan and more. Built for the modern collector.",
       },
-      { property: "og:title", content: "Pitch-Side — Worn by Champions" },
+      { property: "og:title", content: "Kickoff Nagaland — Worn by Champions" },
       {
         property: "og:description",
         content:
