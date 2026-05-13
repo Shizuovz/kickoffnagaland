@@ -234,7 +234,7 @@ function Nav() {
     <nav className="sticky top-0 z-50 flex items-center justify-between px-6 md:px-12 py-4 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="flex gap-10 items-center">
         <a href="/" className="text-xl font-black tracking-tighter uppercase">
-          Pitch<span className="text-accent">/</span>Side
+          Kickoff<span className="text-accent">/</span>Nagaland
         </a>
         <div className="hidden md:flex gap-6 text-[11px] font-bold uppercase tracking-widest">
           <a href="#" className="hover:text-accent transition-colors">Shop All</a>
