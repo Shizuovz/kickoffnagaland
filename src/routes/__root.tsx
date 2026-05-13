@@ -72,10 +72,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Pitch-Side — Premium World Cup Jerseys" },
+      { title: "Kickoff Nagaland — Premium World Cup Jerseys" },
       { name: "description", content: "Premium World Cup national team jerseys for the modern collector." },
-      { name: "author", content: "Pitch-Side" },
-      { property: "og:title", content: "Pitch-Side — Premium World Cup Jerseys" },
+      { name: "author", content: "Kickoff Nagaland" },
+      { property: "og:title", content: "Kickoff Nagaland — Premium World Cup Jerseys" },
       { property: "og:description", content: "Premium World Cup national team jerseys for the modern collector." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
