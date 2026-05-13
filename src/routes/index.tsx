@@ -294,7 +294,7 @@ function Footer() {
         </div>
         <div className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center pt-8 border-t border-border">
           <span className="font-mono text-[9px] text-muted-foreground uppercase tracking-widest">
-            © 2026 Pitch-Side Collective
+            © 2026 Kickoff Nagaland Collective
           </span>
           <span className="font-mono text-[9px] text-muted-foreground uppercase tracking-widest">
             Built for Champions
