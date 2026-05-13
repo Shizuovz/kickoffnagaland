@@ -258,7 +258,7 @@ function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-20">
           <div className="col-span-2 md:col-span-1">
             <h4 className="text-xl font-black tracking-tighter uppercase mb-6">
-              Pitch<span className="text-accent">/</span>Side
+              Kickoff<span className="text-accent">/</span>Nagaland
             </h4>
             <p className="text-muted-foreground text-xs leading-relaxed max-w-[220px]">
               Premium football apparel and national team archives, curated for
