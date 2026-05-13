@@ -9,13 +9,13 @@ import lookbookImg from "@/assets/lookbook.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Pitch-Side — World Cup Jerseys, Worn by Champions" },
+      { title: "Kickoff Nagaland — World Cup Jerseys, Worn by Champions" },
       {
         name: "description",
         content:
           "Premium World Cup national team jerseys. Authentic match-grade silhouettes from Argentina, Brazil, France, Japan and more. Built for the modern collector.",
       },
-      { property: "og:title", content: "Pitch-Side — Worn by Champions" },
+      { property: "og:title", content: "Kickoff Nagaland — Worn by Champions" },
       {
         property: "og:description",
         content:
@@ -234,7 +234,7 @@ function Nav() {
     <nav className="sticky top-0 z-50 flex items-center justify-between px-6 md:px-12 py-4 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="flex gap-10 items-center">
         <a href="/" className="text-xl font-black tracking-tighter uppercase">
-          Pitch<span className="text-accent">/</span>Side
+          Kickoff<span className="text-accent">/</span>Nagaland
         </a>
         <div className="hidden md:flex gap-6 text-[11px] font-bold uppercase tracking-widest">
           <a href="#" className="hover:text-accent transition-colors">Shop All</a>
@@ -258,7 +258,7 @@ function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-20">
           <div className="col-span-2 md:col-span-1">
             <h4 className="text-xl font-black tracking-tighter uppercase mb-6">
-              Pitch<span className="text-accent">/</span>Side
+              Kickoff<span className="text-accent">/</span>Nagaland
             </h4>
             <p className="text-muted-foreground text-xs leading-relaxed max-w-[220px]">
               Premium football apparel and national team archives, curated for
@@ -294,7 +294,7 @@ function Footer() {
         </div>
         <div className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center pt-8 border-t border-border">
           <span className="font-mono text-[9px] text-muted-foreground uppercase tracking-widest">
-            © 2026 Pitch-Side Collective
+            © 2026 Kickoff Nagaland Collective
           </span>
           <span className="font-mono text-[9px] text-muted-foreground uppercase tracking-widest">
             Built for Champions
