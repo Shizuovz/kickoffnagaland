@@ -1,8 +1,7 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { Footer, Nav } from "@/components/site-chrome";
-import heroImg from "@/assets/hero-jersey.jpg";
 import lookbookImg from "@/assets/lookbook.jpg";
-import { products, teams } from "@/lib/catalog";
+import { products, stickerProducts, teams } from "@/lib/catalog";
 import { useCart } from "@/lib/cart";
 import heroVideo from "../assets/video/hero.mp4";
 
@@ -13,13 +12,12 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Premium World Cup national team jerseys. Authentic match-grade silhouettes from Argentina, Brazil, France, Japan and more. Built for the modern collector.",
+          "Premium World Cup national team jerseys, football stickers and match-day accessories. Built for the modern collector.",
       },
       { property: "og:title", content: "Kickoff Nagaland — Worn by Champions" },
       {
         property: "og:description",
-        content:
-          "Premium World Cup national team jerseys for the modern collector.",
+        content: "Premium World Cup national team jerseys for the modern collector.",
       },
       { property: "og:type", content: "website" },
     ],
@@ -35,49 +33,42 @@ function Home() {
       <Nav />
 
       {/* Hero */}
-      <section className="relative isolate h-[88vh] min-h-[640px] overflow-hidden flex flex-col justify-end bg-foreground p-8 md:p-16">
+      <section className="relative isolate flex h-[88vh] min-h-[640px] flex-col justify-end overflow-hidden bg-foreground p-8 text-background md:p-16">
         <div className="absolute inset-0 z-0">
-          {/* <img
-            src={heroImg}
-            alt="Close-up of a premium white football jersey with embroidered gold crest"
-            width={1920}
-            height={1280}
-            className="w-full h-full object-cover object-[58%_center]"
-          /> */}
-
           <video
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover object-[58%_center]"
             autoPlay
             muted
             loop
             playsInline
+            aria-label="Football jersey campaign film"
           >
             <source src={heroVideo} type="video/mp4" />
-            Your browser does not support the video tag.
           </video>
-          {/* Dark Overlay */}
-          {/* <div className="absolute inset-0 bg-black/60" /> */}
-          {/* <div className="absolute inset-0 bg-gradient-to-t from-background via-background/35 to-transparent" /> */}
-          {/* <div className="absolute inset-0 bg-[linear-gradient(90deg,oklch(0.16_0_0/0.58)_0%,oklch(0.16_0_0/0.2)_42%,oklch(0.16_0_0/0.04)_100%)] mix-blend-multiply" /> */}
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,oklch(0.12_0.006_40/0.78)_0%,oklch(0.12_0.006_40/0.48)_43%,oklch(0.12_0.006_40/0.08)_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(0deg,oklch(0.12_0.006_40/0.72)_0%,transparent_42%)]" />
         </div>
         <div className="relative z-10 max-w-4xl">
-          <span className="inline-block bg-accent px-1.5 py-0.5 font-mono text-xs font-bold uppercase tracking-[0.45em] text-accent-foreground mb-4 animate-fade-up">
+          <span className="mb-4 inline-block bg-accent px-1.5 py-0.5 font-mono text-xs font-bold uppercase tracking-[0.45em] text-accent-foreground animate-fade-up">
             World Cup 2026 Series
           </span>
-          <h1 className="mb-8 inline-block rounded-[15px] border border-white/10 bg-[#b31f1f] px-6 py-4 text-5xl font-black uppercase leading-[0.9] tracking-tighter text-white shadow-2xl backdrop-blur-sm animate-fade-up md:px-8 md:py-5 md:text-8xl">
+          <h1 className="mb-8 inline-block rounded-[15px] border border-background/10 bg-accent px-6 py-4 text-5xl font-black uppercase leading-[0.9] tracking-tighter text-accent-foreground shadow-2xl animate-fade-up md:px-8 md:py-5 md:text-8xl">
             Worn by <br />
             Champions.
           </h1>
           <div className="flex flex-wrap gap-4 animate-fade-up-delay">
             <Link
               to="/shop"
-              className="px-8 py-4 bg-foreground text-background font-bold uppercase text-xs tracking-widest hover:bg-accent transition-colors"
+              className="bg-background px-8 py-4 text-xs font-bold uppercase tracking-widest text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
             >
               Shop the Drop
             </Link>
-            <button className="px-8 py-4 border border-foreground font-bold uppercase text-xs tracking-widest hover:bg-foreground hover:text-background transition-all">
+            <a
+              href="#lookbook"
+              className="border border-background px-8 py-4 text-xs font-bold uppercase tracking-widest text-background transition-all hover:bg-background hover:text-foreground"
+            >
               The Lookbook
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -86,10 +77,7 @@ function Home() {
       <div className="py-6 border-y border-border overflow-hidden whitespace-nowrap bg-surface">
         <div className="inline-block animate-marquee">
           {[...teams, ...teams].map((t, i) => (
-            <span
-              key={i}
-              className="font-mono text-sm mx-12 uppercase tracking-wider"
-            >
+            <span key={i} className="font-mono text-sm mx-12 uppercase tracking-wider">
               {t}
               <span className="text-accent ml-12">✦</span>
             </span>
@@ -157,9 +145,7 @@ function Home() {
                     <p className="font-mono text-[10px] uppercase text-muted-foreground mb-1">
                       {p.team} / {p.season}
                     </p>
-                    <h3 className="font-bold uppercase text-sm tracking-tight">
-                      {p.name}
-                    </h3>
+                    <h3 className="font-bold uppercase text-sm tracking-tight">{p.name}</h3>
                   </div>
                   <span className="font-mono text-sm">{p.price}</span>
                 </Link>
@@ -169,8 +155,81 @@ function Home() {
         </div>
       </section>
 
+      {/* Sticker Drop */}
+      <section className="border-y border-border bg-surface px-6 py-16 md:px-12 md:py-20">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[320px_1fr]">
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <span className="mb-5 inline-block bg-accent px-1.5 py-0.5 font-mono text-xs font-bold uppercase tracking-[0.45em] text-accent-foreground">
+              Sticker Drop
+            </span>
+            <h2 className="text-4xl font-black uppercase leading-[0.9] tracking-tighter md:text-6xl">
+              Football For
+              <br />
+              Every Surface.
+            </h2>
+            <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted-foreground">
+              Laptop stickers, wall sets and weatherproof decals made for rooms, bottles, cases and
+              match-day corners.
+            </p>
+            <Link
+              to="/stickers"
+              className="mt-8 inline-block bg-foreground px-8 py-4 text-xs font-bold uppercase tracking-widest text-background transition-colors hover:bg-accent"
+            >
+              Shop Stickers
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {stickerProducts.slice(0, 3).map((sticker, index) => (
+              <article key={sticker.id} className="group">
+                <div className="relative mb-4 aspect-[4/3] overflow-hidden bg-background">
+                  <img
+                    src={sticker.img}
+                    alt={`${sticker.team} ${sticker.name}`}
+                    width={900}
+                    height={675}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+                  />
+                  <div className="absolute left-4 top-4 flex items-center gap-2">
+                    <span className="bg-background px-2 py-1 font-mono text-[9px] uppercase tracking-[0.3em] text-foreground">
+                      0{index + 1}
+                    </span>
+                    {sticker.badge && (
+                      <span className="bg-foreground px-2 py-1 text-[9px] font-bold uppercase tracking-widest text-background">
+                        {sticker.badge}
+                      </span>
+                    )}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => requestAddToCart(sticker)}
+                    className="absolute inset-x-4 bottom-4 bg-foreground px-5 py-3 text-xs font-bold uppercase tracking-widest text-background opacity-100 transition-all duration-300 hover:bg-accent md:translate-y-2 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+
+                <div className="flex justify-between gap-4">
+                  <div>
+                    <p className="mb-1 font-mono text-[10px] uppercase text-muted-foreground">
+                      {sticker.season} / {sticker.palette}
+                    </p>
+                    <h3 className="text-sm font-bold uppercase tracking-tight">{sticker.name}</h3>
+                  </div>
+                  <span className="font-mono text-sm">{sticker.price}</span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Editorial Lookbook */}
-      <section className="grid md:grid-cols-2 bg-foreground text-background">
+      <section
+        id="lookbook"
+        className="grid scroll-mt-24 md:grid-cols-2 bg-foreground text-background"
+      >
         <div className="relative aspect-square md:aspect-auto md:min-h-[640px] overflow-hidden">
           <img
             src={lookbookImg}
@@ -190,8 +249,8 @@ function Home() {
             90 Minutes
           </h2>
           <p className="text-neutral-400 text-base md:text-lg leading-relaxed mb-10 max-w-md">
-            The jersey is more than equipment. It is an archive of moments, a
-            weight of history, and the uniform of a global identity.
+            The jersey is more than equipment. It is an archive of moments, a weight of history, and
+            the uniform of a global identity.
           </p>
           <a
             href="#"
@@ -212,9 +271,7 @@ function Home() {
             ["100%", "Authenticated"],
           ].map(([n, l]) => (
             <div key={l} className="p-8 md:p-12">
-              <div className="text-4xl md:text-5xl font-black tracking-tighter mb-2">
-                {n}
-              </div>
+              <div className="text-4xl md:text-5xl font-black tracking-tighter mb-2">{n}</div>
               <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                 {l}
               </div>

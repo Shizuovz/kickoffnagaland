@@ -2,6 +2,9 @@ import argentinaImg from "@/assets/jersey-argentina.jpg";
 import brazilImg from "@/assets/jersey-brazil.jpg";
 import franceImg from "@/assets/jersey-france.jpg";
 import japanImg from "@/assets/jersey-japan.jpg";
+import stickerGermanyImg from "@/assets/stickers/sticker1.jpeg";
+import stickerPortugalImg from "@/assets/stickers/sticker2.jpeg";
+import stickerBrazilImg from "@/assets/stickers/sticker3.jpeg";
 
 export const teams = [
   "Argentina",
@@ -25,7 +28,7 @@ export const products = [
     team: "France",
     season: "2024 Home",
     name: "FFF Stadium Edition",
-    price: "$120",
+    price: "₹120",
     priceValue: 120,
     badge: "New Arrival",
     palette: "Navy / White",
@@ -37,7 +40,7 @@ export const products = [
     team: "Argentina",
     season: "2024 Home",
     name: "AFA Authentic Three-Star",
-    price: "$160",
+    price: "₹160",
     priceValue: 160,
     badge: null,
     palette: "Sky / White",
@@ -49,7 +52,7 @@ export const products = [
     team: "Japan",
     season: "2024 Special",
     name: "Samurai Blue Kit",
-    price: "$140",
+    price: "₹140",
     priceValue: 140,
     badge: "Limited",
     palette: "Blue / Crimson",
@@ -61,7 +64,7 @@ export const products = [
     team: "Brazil",
     season: "2024 Home",
     name: "CBF Selecao Edition",
-    price: "$120",
+    price: "₹120",
     priceValue: 120,
     badge: null,
     palette: "Canary / Green",
@@ -73,7 +76,7 @@ export const products = [
     team: "Argentina",
     season: "1994 Archive",
     name: "La Plata Retro Home",
-    price: "$135",
+    price: "₹135",
     priceValue: 135,
     badge: "Archive",
     palette: "Sky / Black",
@@ -85,7 +88,7 @@ export const products = [
     team: "France",
     season: "1998 Archive",
     name: "Les Bleus Trophy Shirt",
-    price: "$150",
+    price: "₹150",
     priceValue: 150,
     badge: "Collectors",
     palette: "Royal / Red",
@@ -97,7 +100,7 @@ export const products = [
     team: "Brazil",
     season: "2002 Archive",
     name: "R9 Finals Edition",
-    price: "$155",
+    price: "₹155",
     priceValue: 155,
     badge: "Restocked",
     palette: "Yellow / Blue",
@@ -109,7 +112,7 @@ export const products = [
     team: "Japan",
     season: "2022 Away",
     name: "Origami White Kit",
-    price: "$118",
+    price: "₹118",
     priceValue: 118,
     badge: null,
     palette: "White / Blue",
@@ -118,6 +121,51 @@ export const products = [
 ];
 
 export type Product = (typeof products)[number];
+
+export const stickerProducts = [
+  {
+    id: "germany-flag-wall-sticker",
+    img: stickerGermanyImg,
+    team: "Germany",
+    season: "Wall Sticker",
+    name: "Germany Flag Wall Sticker",
+    price: "₹249",
+    priceValue: 249,
+    badge: "New",
+    palette: "Black / Red / Gold",
+    fit: "Wall Vinyl",
+    category: "Sticker",
+  },
+  {
+    id: "portugal-flag-wall-sticker",
+    img: stickerPortugalImg,
+    team: "Portugal",
+    season: "Wall Sticker",
+    name: "Portugal Flag Wall Sticker",
+    price: "₹249",
+    priceValue: 249,
+    badge: "Wall Safe",
+    palette: "Green / Red / Gold",
+    fit: "Removable Vinyl",
+    category: "Sticker",
+  },
+  {
+    id: "brazil-flag-wall-sticker",
+    img: stickerBrazilImg,
+    team: "Brazil",
+    season: "Wall Sticker",
+    name: "Brazil Flag Wall Sticker",
+    price: "₹249",
+    priceValue: 249,
+    badge: "Popular",
+    palette: "Green / Yellow / Blue",
+    fit: "Wall Vinyl",
+    category: "Sticker",
+  },
+];
+
+export type StickerProduct = (typeof stickerProducts)[number];
+export type CatalogItem = Product | StickerProduct;
 
 export function productPath(product: Product) {
   return `/products/${product.id}`;

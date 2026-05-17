@@ -1,21 +1,14 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-  type ReactNode,
-} from "react";
-import type { Product } from "@/lib/catalog";
+import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import type { CatalogItem } from "@/lib/catalog";
 
 type CartLine = {
-  product: Product;
+  product: CatalogItem;
   size: string;
   quantity: number;
 };
 
 type StoredCartLine = {
-  product: Product;
+  product: CatalogItem;
   size?: string;
   quantity: number;
 };
@@ -24,8 +17,8 @@ type CartContextValue = {
   items: CartLine[];
   itemCount: number;
   subtotal: number;
-  addItem: (product: Product, size: string) => void;
-  requestAddToCart: (product: Product) => void;
+  addItem: (product: CatalogItem, size: string) => void;
+  requestAddToCart: (product: CatalogItem) => void;
   decrementItem: (productId: string, size: string) => void;
   removeItem: (productId: string, size: string) => void;
   clearCart: () => void;
@@ -34,12 +27,17 @@ type CartContextValue = {
 const CartContext = createContext<CartContextValue | undefined>(undefined);
 const storageKey = "kickoff-nagaland-cart";
 const defaultSize = "M";
+const oneSize = "OS";
 const sizes = ["S", "M", "L", "XL", "XXL"];
+
+function isSticker(product: CatalogItem) {
+  return "category" in product && product.category === "Sticker";
+}
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartLine[]>([]);
   const [hasHydrated, setHasHydrated] = useState(false);
-  const [pendingProduct, setPendingProduct] = useState<Product | null>(null);
+  const [pendingProduct, setPendingProduct] = useState<CatalogItem | null>(null);
   const [selectedSize, setSelectedSize] = useState(defaultSize);
 
   useEffect(() => {
@@ -74,7 +72,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [hasHydrated, items]);
 
   const value = useMemo<CartContextValue>(() => {
-    const addItem = (product: Product, size: string) => {
+    const addItem = (product: CatalogItem, size: string) => {
       setItems((current) => {
         const existing = current.find(
           (item) => item.product.id === product.id && item.size === size,
@@ -91,7 +89,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
       });
     };
 
-    const requestAddToCart = (product: Product) => {
+    const requestAddToCart = (product: CatalogItem) => {
+      if (isSticker(product)) {
+        addItem(product, oneSize);
+        return;
+      }
+
       setPendingProduct(product);
       setSelectedSize(defaultSize);
     };
@@ -144,7 +147,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     <CartContext.Provider value={value}>
       {children}
 
-      {pendingProduct && (
+      {pendingProduct && !isSticker(pendingProduct) && (
         <div className="fixed inset-0 z-[90] grid place-items-center px-4">
           <button
             type="button"
