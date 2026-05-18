@@ -1,9 +1,9 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { Footer, Nav } from "@/components/site-chrome";
 import lookbookImg from "@/assets/lookbook.jpg";
-import { products, stickerProducts, teams } from "@/lib/catalog";
+import { products, teams } from "@/lib/catalog";
 import { useCart } from "@/lib/cart";
-import heroVideo from "../assets/video/hero.mp4";
+import heroVideo from "../assets/video/new.mp4";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -12,7 +12,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Premium World Cup national team jerseys, football stickers and match-day accessories. Built for the modern collector.",
+          "Premium World Cup national team jerseys. Authentic match-grade silhouettes from Argentina, Brazil, France, Japan and more. Built for the modern collector.",
       },
       { property: "og:title", content: "Kickoff Nagaland — Worn by Champions" },
       {
@@ -33,7 +33,7 @@ function Home() {
       <Nav />
 
       {/* Hero */}
-      <section className="relative isolate flex h-[88vh] min-h-[640px] flex-col justify-end overflow-hidden bg-foreground p-8 text-background md:p-16">
+      <section className="relative isolate flex min-h-[calc(100svh-65px)] overflow-hidden bg-foreground px-6 py-10 text-background md:min-h-[760px] md:px-12 md:py-14">
         <div className="absolute inset-0 z-0">
           <video
             className="absolute inset-0 h-full w-full object-cover object-[58%_center]"
@@ -48,27 +48,40 @@ function Home() {
           <div className="absolute inset-0 bg-[linear-gradient(90deg,oklch(0.12_0.006_40/0.78)_0%,oklch(0.12_0.006_40/0.48)_43%,oklch(0.12_0.006_40/0.08)_100%)]" />
           <div className="absolute inset-0 bg-[linear-gradient(0deg,oklch(0.12_0.006_40/0.72)_0%,transparent_42%)]" />
         </div>
-        <div className="relative z-10 max-w-4xl">
-          <span className="mb-4 inline-block bg-accent px-1.5 py-0.5 font-mono text-xs font-bold uppercase tracking-[0.45em] text-accent-foreground animate-fade-up">
-            World Cup 2026 Series
-          </span>
-          <h1 className="mb-8 inline-block rounded-[15px] border border-background/10 bg-accent px-6 py-4 text-5xl font-black uppercase leading-[0.9] tracking-tighter text-accent-foreground shadow-2xl animate-fade-up md:px-8 md:py-5 md:text-8xl">
-            Worn by <br />
-            Champions.
-          </h1>
-          <div className="flex flex-wrap gap-4 animate-fade-up-delay">
-            <Link
-              to="/shop"
-              className="bg-background px-8 py-4 text-xs font-bold uppercase tracking-widest text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-            >
-              Shop the Drop
-            </Link>
-            <a
-              href="#lookbook"
-              className="border border-background px-8 py-4 text-xs font-bold uppercase tracking-widest text-background transition-all hover:bg-background hover:text-foreground"
-            >
-              The Lookbook
-            </a>
+        <div className="relative z-10 mt-auto grid w-full max-w-7xl gap-10 md:grid-cols-[minmax(0,1fr)_320px] md:items-end">
+          <div className="max-w-5xl">
+            <span className="mb-5 inline-block bg-accent px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.34em] text-accent-foreground animate-fade-up sm:text-xs sm:tracking-[0.45em]">
+              World Cup 2026 Series
+            </span>
+            <h1 className="max-w-4xl text-6xl font-black uppercase leading-[0.82] tracking-tighter text-background text-balance drop-shadow-2xl animate-fade-up sm:text-7xl md:text-9xl">
+              Worn by
+              <br />
+              Champions.
+            </h1>
+            <p className="mt-6 max-w-xl text-sm leading-relaxed text-background/78 animate-fade-up-delay md:text-base">
+              National team jerseys with archive detail, match-day energy and a sharper fit for the
+              modern collector.
+            </p>
+          </div>
+
+          <div className="animate-fade-up-delay md:pb-2">
+            <div className="mb-6 hidden border-y border-background/25 py-4 font-mono text-[10px] uppercase tracking-[0.28em] text-background/72 md:block">
+              Argentina / Brazil / France / Japan
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row md:flex-col">
+              <Link
+                to="/shop"
+                className="bg-background px-7 py-4 text-center text-xs font-bold uppercase tracking-widest text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+              >
+                Shop the Drop
+              </Link>
+              <a
+                href="#lookbook"
+                className="border border-background/55 px-7 py-4 text-center text-xs font-bold uppercase tracking-widest text-background transition-all hover:border-background hover:bg-background hover:text-foreground"
+              >
+                The Lookbook
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -149,76 +162,6 @@ function Home() {
                   </div>
                   <span className="font-mono text-sm">{p.price}</span>
                 </Link>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Sticker Drop */}
-      <section className="border-y border-border bg-surface px-6 py-16 md:px-12 md:py-20">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[320px_1fr]">
-          <div className="lg:sticky lg:top-28 lg:self-start">
-            <span className="mb-5 inline-block bg-accent px-1.5 py-0.5 font-mono text-xs font-bold uppercase tracking-[0.45em] text-accent-foreground">
-              Sticker Drop
-            </span>
-            <h2 className="text-4xl font-black uppercase leading-[0.9] tracking-tighter md:text-6xl">
-              Football For
-              <br />
-              Every Surface.
-            </h2>
-            <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Laptop stickers, wall sets and weatherproof decals made for rooms, bottles, cases and
-              match-day corners.
-            </p>
-            <Link
-              to="/stickers"
-              className="mt-8 inline-block bg-foreground px-8 py-4 text-xs font-bold uppercase tracking-widest text-background transition-colors hover:bg-accent"
-            >
-              Shop Stickers
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {stickerProducts.slice(0, 3).map((sticker, index) => (
-              <article key={sticker.id} className="group">
-                <div className="relative mb-4 aspect-[4/3] overflow-hidden bg-background">
-                  <img
-                    src={sticker.img}
-                    alt={`${sticker.team} ${sticker.name}`}
-                    width={900}
-                    height={675}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
-                  />
-                  <div className="absolute left-4 top-4 flex items-center gap-2">
-                    <span className="bg-background px-2 py-1 font-mono text-[9px] uppercase tracking-[0.3em] text-foreground">
-                      0{index + 1}
-                    </span>
-                    {sticker.badge && (
-                      <span className="bg-foreground px-2 py-1 text-[9px] font-bold uppercase tracking-widest text-background">
-                        {sticker.badge}
-                      </span>
-                    )}
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => requestAddToCart(sticker)}
-                    className="absolute inset-x-4 bottom-4 bg-foreground px-5 py-3 text-xs font-bold uppercase tracking-widest text-background opacity-100 transition-all duration-300 hover:bg-accent md:translate-y-2 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100"
-                  >
-                    Add to Cart
-                  </button>
-                </div>
-
-                <div className="flex justify-between gap-4">
-                  <div>
-                    <p className="mb-1 font-mono text-[10px] uppercase text-muted-foreground">
-                      {sticker.season} / {sticker.palette}
-                    </p>
-                    <h3 className="text-sm font-bold uppercase tracking-tight">{sticker.name}</h3>
-                  </div>
-                  <span className="font-mono text-sm">{sticker.price}</span>
-                </div>
               </article>
             ))}
           </div>
