@@ -53,7 +53,7 @@ function Home() {
             <span className="mb-5 inline-block bg-accent px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.34em] text-accent-foreground animate-fade-up sm:text-xs sm:tracking-[0.45em]">
               World Cup 2026 Series
             </span>
-            <h1 className="max-w-4xl text-6xl font-black uppercase leading-[0.82] tracking-tighter text-background text-balance drop-shadow-2xl animate-fade-up sm:text-7xl md:text-9xl">
+            <h1 className="max-w-full text-5xl font-black uppercase leading-[0.88] tracking-normal text-background text-balance drop-shadow-2xl animate-fade-up sm:text-7xl md:max-w-4xl md:text-9xl">
               Worn by
               <br />
               Champions.

@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, Minus, Plus, Search, X } from "lucide-react";
+import { Menu, Minus, Plus, Search, ShoppingBag, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useCart } from "@/lib/cart";
 import { products, stickerProducts } from "@/lib/catalog";
@@ -68,6 +68,21 @@ export function Nav() {
         <div className="flex items-center gap-4 text-[11px] font-bold uppercase tracking-widest md:gap-6">
           <button
             type="button"
+            aria-label={`Open cart with ${itemCount} item${itemCount === 1 ? "" : "s"}`}
+            onClick={() => setIsCartOpen(true)}
+            className={`relative grid size-9 place-items-center border transition-colors hover:border-foreground md:hidden ${
+              itemCount > 0 ? "border-foreground bg-foreground text-background" : "border-border"
+            }`}
+          >
+            <ShoppingBag className="size-4" />
+            {itemCount > 0 && (
+              <span className="absolute -right-2 -top-2 grid size-5 place-items-center bg-accent font-mono text-[10px] font-bold text-accent-foreground">
+                {itemCount}
+              </span>
+            )}
+          </button>
+          <button
+            type="button"
             aria-label="Open navigation menu"
             aria-expanded={isMenuOpen}
             onClick={() => setIsMenuOpen(true)}
@@ -94,6 +109,28 @@ export function Nav() {
           </button>
         </div>
       </nav>
+
+      {itemCount > 0 && !isCartOpen && !isMenuOpen && !isSearchOpen && (
+        <div className="fixed inset-x-3 bottom-3 z-40 border border-foreground bg-background shadow-2xl md:hidden">
+          <button
+            type="button"
+            onClick={() => setIsCartOpen(true)}
+            className="flex w-full items-center justify-between gap-4 px-4 py-3 text-left"
+          >
+            <span>
+              <span className="block font-mono text-[9px] uppercase tracking-[0.28em] text-accent">
+                Cart Updated
+              </span>
+              <span className="mt-1 block text-xs font-black uppercase tracking-widest">
+                {itemCount} item{itemCount === 1 ? "" : "s"} in cart
+              </span>
+            </span>
+            <span className="bg-foreground px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-background">
+              View
+            </span>
+          </button>
+        </div>
+      )}
 
       {isMenuOpen && (
         <div className="fixed inset-0 z-[70] md:hidden">
