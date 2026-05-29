@@ -6,7 +6,9 @@ export type WhatsAppOrderLine = {
   size: string;
 };
 
-const whatsappOrderNumber = import.meta.env.VITE_WHATSAPP_ORDER_NUMBER ?? "";
+const defaultWhatsAppOrderNumber = "917005570316";
+const whatsappOrderNumber =
+  import.meta.env.VITE_WHATSAPP_ORDER_NUMBER ?? defaultWhatsAppOrderNumber;
 
 export function buildWhatsAppUrl(message: string) {
   const cleanNumber = whatsappOrderNumber.replace(/\D/g, "");
