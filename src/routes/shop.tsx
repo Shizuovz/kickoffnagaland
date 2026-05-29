@@ -147,7 +147,7 @@ function ShopAll() {
             </aside>
 
             <div>
-              <div className="mb-8 flex items-end justify-between gap-6">
+              <div className="mb-8">
                 <div>
                   <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                     {visibleProducts.length} Jersey{visibleProducts.length === 1 ? "" : "s"}
@@ -156,12 +156,6 @@ function ShopAll() {
                     {activeTeam === "All Teams" ? "Available Now" : activeTeam}
                   </h2>
                 </div>
-                <a
-                  href="#"
-                  className="hidden font-mono text-[10px] uppercase tracking-widest underline underline-offset-4 transition-colors hover:text-accent md:inline-block"
-                >
-                  Size Guide
-                </a>
               </div>
 
               {visibleProducts.length > 0 ? (
