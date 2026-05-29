@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 
 import { CartProvider } from "@/lib/cart";
+import kickoffIcon from "@/assets/logo/kickoff.png?url";
 import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
@@ -74,16 +75,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Kickoff Nagaland — Premium World Cup Jerseys" },
-      { name: "description", content: "Premium World Cup national team jerseys for the modern collector." },
+      {
+        name: "description",
+        content: "Premium World Cup national team jerseys for the modern collector.",
+      },
       { name: "author", content: "Kickoff Nagaland" },
       { property: "og:title", content: "Kickoff Nagaland — Premium World Cup Jerseys" },
-      { property: "og:description", content: "Premium World Cup national team jerseys for the modern collector." },
+      {
+        property: "og:description",
+        content: "Premium World Cup national team jerseys for the modern collector.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "icon", type: "image/png", href: kickoffIcon },
+      { rel: "apple-touch-icon", href: kickoffIcon },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {

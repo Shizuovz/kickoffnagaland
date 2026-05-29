@@ -114,7 +114,7 @@ function Home() {
               to="/shop"
               className="font-mono text-[10px] uppercase tracking-widest underline underline-offset-4 hover:text-accent transition-colors"
             >
-              View all 48 kits
+              View all kits
             </Link>
           </div>
 

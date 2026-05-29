@@ -1,6 +1,7 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
+import { useMemo, useState } from "react";
 import { Footer, Nav } from "@/components/site-chrome";
-import { products, teams } from "@/lib/catalog";
+import { products } from "@/lib/catalog";
 import { useCart } from "@/lib/cart";
 
 export const Route = createFileRoute("/shop")({
@@ -29,6 +30,36 @@ const sortOptions = ["Featured", "Newest", "Price"];
 
 function ShopAll() {
   const { requestAddToCart } = useCart();
+  const [activeFilter, setActiveFilter] = useState("All Kits");
+  const [activeTeam, setActiveTeam] = useState("All Teams");
+  const [activeSort, setActiveSort] = useState("Featured");
+  const availableTeams = useMemo(
+    () => Array.from(new Set(products.map((product) => product.team))).sort(),
+    [],
+  );
+  const visibleProducts = useMemo(() => {
+    const filteredProducts = products.filter((product) => {
+      const matchesTeam = activeTeam === "All Teams" || product.team === activeTeam;
+      const matchesFilter =
+        activeFilter === "All Kits" ||
+        product.season.toLowerCase().includes(activeFilter.toLowerCase()) ||
+        product.badge?.toLowerCase().includes(activeFilter.toLowerCase());
+
+      return matchesTeam && matchesFilter;
+    });
+
+    return [...filteredProducts].sort((a, b) => {
+      if (activeSort === "Price") {
+        return a.priceValue - b.priceValue || a.name.localeCompare(b.name);
+      }
+
+      if (activeSort === "Newest") {
+        return b.id.localeCompare(a.id);
+      }
+
+      return products.indexOf(a) - products.indexOf(b);
+    });
+  }, [activeFilter, activeSort, activeTeam]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -48,8 +79,8 @@ function ShopAll() {
               </h1>
             </div>
             <p className="max-w-sm text-sm leading-relaxed text-muted-foreground md:text-base">
-              Match-grade silhouettes, stadium staples and collector archive
-              shirts selected for modern supporters in Nagaland and beyond.
+              Match-grade silhouettes, stadium staples and collector archive shirts selected for
+              modern supporters in Nagaland and beyond.
             </p>
           </div>
         </section>
@@ -57,11 +88,13 @@ function ShopAll() {
         <section className="border-b border-border bg-surface px-6 md:px-12">
           <div className="mx-auto flex max-w-7xl flex-col gap-6 py-5 md:flex-row md:items-center md:justify-between">
             <div className="flex flex-wrap gap-2">
-              {filters.map((filter, index) => (
+              {filters.map((filter) => (
                 <button
                   key={filter}
+                  type="button"
+                  onClick={() => setActiveFilter(filter)}
                   className={`border px-4 py-2 font-mono text-[10px] uppercase tracking-widest transition-colors ${
-                    index === 0
+                    activeFilter === filter
                       ? "border-foreground bg-foreground text-background"
                       : "border-border hover:border-foreground"
                   }`}
@@ -72,11 +105,13 @@ function ShopAll() {
             </div>
             <div className="flex items-center gap-3 overflow-x-auto font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
               <span>Sort</span>
-              {sortOptions.map((option, index) => (
+              {sortOptions.map((option) => (
                 <button
                   key={option}
+                  type="button"
+                  onClick={() => setActiveSort(option)}
                   className={`whitespace-nowrap transition-colors hover:text-foreground ${
-                    index === 0 ? "text-foreground" : ""
+                    activeSort === option ? "text-foreground" : ""
                   }`}
                 >
                   {option}
@@ -94,14 +129,17 @@ function ShopAll() {
                   National Teams
                 </h2>
                 <ul className="space-y-3 text-xs font-bold uppercase tracking-widest">
-                  {teams.slice(0, 10).map((team) => (
+                  {["All Teams", ...availableTeams].map((team) => (
                     <li key={team}>
-                      <a
-                        href="#"
-                        className="text-muted-foreground transition-colors hover:text-foreground"
+                      <button
+                        type="button"
+                        onClick={() => setActiveTeam(team)}
+                        className={`text-left transition-colors hover:text-foreground ${
+                          activeTeam === team ? "text-foreground" : "text-muted-foreground"
+                        }`}
                       >
                         {team}
-                      </a>
+                      </button>
                     </li>
                   ))}
                 </ul>
@@ -112,10 +150,10 @@ function ShopAll() {
               <div className="mb-8 flex items-end justify-between gap-6">
                 <div>
                   <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                    {products.length} Jerseys
+                    {visibleProducts.length} Jersey{visibleProducts.length === 1 ? "" : "s"}
                   </p>
                   <h2 className="mt-2 text-2xl font-black uppercase tracking-tighter md:text-3xl">
-                    Available Now
+                    {activeTeam === "All Teams" ? "Available Now" : activeTeam}
                   </h2>
                 </div>
                 <a
@@ -126,58 +164,83 @@ function ShopAll() {
                 </a>
               </div>
 
-              <div className="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 xl:grid-cols-3">
-                {products.map((product) => (
-                  <article key={`${product.team}-${product.name}`} className="group cursor-pointer">
-                    <div className="relative mb-4 aspect-[3/4] overflow-hidden bg-stone-soft">
+              {visibleProducts.length > 0 ? (
+                <div className="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 xl:grid-cols-3">
+                  {visibleProducts.map((product) => (
+                    <article
+                      key={`${product.team}-${product.name}`}
+                      className="group cursor-pointer"
+                    >
+                      <div className="relative mb-4 aspect-[3/4] overflow-hidden bg-stone-soft">
+                        <Link
+                          to="/products/$productId"
+                          params={{ productId: product.id }}
+                          className="block h-full w-full"
+                        >
+                          <img
+                            src={product.img}
+                            alt={`${product.team} ${product.season} ${product.name}`}
+                            width={800}
+                            height={1067}
+                            loading="lazy"
+                            className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+                          />
+                        </Link>
+                        {product.badge && (
+                          <div className="absolute left-4 top-4 bg-foreground px-2 py-1 text-[9px] font-bold uppercase tracking-widest text-background">
+                            {product.badge}
+                          </div>
+                        )}
+                        <button
+                          type="button"
+                          onClick={() => requestAddToCart(product)}
+                          className="absolute inset-x-4 bottom-4 bg-foreground px-5 py-3 text-xs font-bold uppercase tracking-widest text-background opacity-100 transition-all duration-300 hover:bg-accent md:translate-y-2 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100"
+                        >
+                          Add to Cart
+                        </button>
+                      </div>
                       <Link
                         to="/products/$productId"
                         params={{ productId: product.id }}
-                        className="block h-full w-full"
+                        className="flex justify-between gap-4"
                       >
-                        <img
-                          src={product.img}
-                          alt={`${product.team} ${product.season} ${product.name}`}
-                          width={800}
-                          height={1067}
-                          loading="lazy"
-                          className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
-                        />
-                      </Link>
-                      {product.badge && (
-                        <div className="absolute left-4 top-4 bg-foreground px-2 py-1 text-[9px] font-bold uppercase tracking-widest text-background">
-                          {product.badge}
+                        <div>
+                          <p className="mb-1 font-mono text-[10px] uppercase text-muted-foreground">
+                            {product.team} / {product.season}
+                          </p>
+                          <h3 className="text-sm font-bold uppercase tracking-tight">
+                            {product.name}
+                          </h3>
+                          <p className="mt-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                            {product.fit} / {product.palette}
+                          </p>
                         </div>
-                      )}
-                      <button
-                        type="button"
-                        onClick={() => requestAddToCart(product)}
-                        className="absolute inset-x-4 bottom-4 bg-foreground px-5 py-3 text-xs font-bold uppercase tracking-widest text-background opacity-100 transition-all duration-300 hover:bg-accent md:translate-y-2 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100"
-                      >
-                        Add to Cart
-                      </button>
-                    </div>
-                    <Link
-                      to="/products/$productId"
-                      params={{ productId: product.id }}
-                      className="flex justify-between gap-4"
-                    >
-                      <div>
-                        <p className="mb-1 font-mono text-[10px] uppercase text-muted-foreground">
-                          {product.team} / {product.season}
-                        </p>
-                        <h3 className="text-sm font-bold uppercase tracking-tight">
-                          {product.name}
-                        </h3>
-                        <p className="mt-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                          {product.fit} / {product.palette}
-                        </p>
-                      </div>
-                      <span className="font-mono text-sm">{product.price}</span>
-                    </Link>
-                  </article>
-                ))}
-              </div>
+                        <span className="font-mono text-sm">{product.price}</span>
+                      </Link>
+                    </article>
+                  ))}
+                </div>
+              ) : (
+                <div className="border-y border-border py-14">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
+                    No Matches
+                  </p>
+                  <h3 className="mt-3 text-4xl font-black uppercase leading-[0.9] tracking-tighter">
+                    No kits match this filter.
+                  </h3>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setActiveFilter("All Kits");
+                      setActiveTeam("All Teams");
+                      setActiveSort("Featured");
+                    }}
+                    className="mt-8 bg-foreground px-6 py-3 text-xs font-bold uppercase tracking-widest text-background transition-colors hover:bg-accent"
+                  >
+                    Reset Filters
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </section>

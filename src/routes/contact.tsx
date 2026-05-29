@@ -24,15 +24,36 @@ export const Route = createFileRoute("/contact")({
 });
 
 const contactMethods = [
-  ["Order Support", "orders@kickoffnagaland.com", "Tracking, exchanges, delivery updates and payment questions."],
-  ["Sourcing Desk", "source@kickoffnagaland.com", "Rare national team kits, archive shirts and collector requests."],
-  ["General", "hello@kickoffnagaland.com", "Partnerships, press, local events and everything else."],
+  [
+    "Order Support",
+    "kickoffnagaland@gmail.com",
+    "Tracking, exchanges, delivery updates and payment questions.",
+  ],
+  [
+    "Sourcing Desk",
+    "kickoffnagaland@gmail.com",
+    "Rare national team kits, archive shirts and collector requests.",
+  ],
+  [
+    "General",
+    "kickoffnagaland@gmail.com",
+    "Partnerships, press, local events and everything else.",
+  ],
 ];
 
 const faqs = [
-  ["Do you help with sizing?", "Yes. Send us your height, weight, preferred fit and a shirt you already own. We will recommend the closest match."],
-  ["Can I request a specific team kit?", "Yes. Our sourcing desk keeps a request list for national team shirts, archive editions and tournament drops."],
-  ["Where do you ship?", "We currently support domestic delivery and selected international orders. Shipping options are confirmed during checkout."],
+  [
+    "Do you help with sizing?",
+    "Yes. Send us your height, weight, preferred fit and a shirt you already own. We will recommend the closest match.",
+  ],
+  [
+    "Can I request a specific team kit?",
+    "Yes. Our sourcing desk keeps a request list for national team shirts, archive editions and tournament drops.",
+  ],
+  [
+    "Where do you ship?",
+    "We currently support domestic delivery and selected international orders. Shipping options are confirmed on WhatsApp.",
+  ],
 ];
 
 function Contact() {
@@ -54,9 +75,8 @@ function Contact() {
               </h1>
             </div>
             <p className="max-w-sm text-sm leading-relaxed text-muted-foreground md:text-base">
-              Need sizing help, order support or a hard-to-find national team
-              jersey? Send the details and we will point you in the right
-              direction.
+              Need sizing help, order support or a hard-to-find national team jersey? Send the
+              details and we will point you in the right direction.
             </p>
           </div>
         </section>
@@ -132,18 +152,14 @@ function Contact() {
               <div className="divide-y divide-border border-y border-border">
                 {contactMethods.map(([title, email, body]) => (
                   <div key={title} className="py-6">
-                    <h2 className="mb-2 text-lg font-black uppercase tracking-tighter">
-                      {title}
-                    </h2>
+                    <h2 className="mb-2 text-lg font-black uppercase tracking-tighter">{title}</h2>
                     <a
                       href={`mailto:${email}`}
                       className="font-mono text-xs uppercase tracking-widest text-accent transition-colors hover:text-foreground"
                     >
                       {email}
                     </a>
-                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                      {body}
-                    </p>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{body}</p>
                   </div>
                 ))}
               </div>
@@ -171,9 +187,8 @@ function Contact() {
               Private Viewing.
             </h2>
             <p className="max-w-lg text-sm leading-relaxed text-neutral-400 md:text-base">
-              For collectors in Nagaland, selected drops can be viewed by
-              appointment. Send your preferred team, size and date, and we will
-              confirm availability before you come in.
+              For collectors in Nagaland, selected drops can be viewed by appointment. Send your
+              preferred team, size and date, and we will confirm availability before you come in.
             </p>
           </div>
         </section>
@@ -188,9 +203,7 @@ function Contact() {
             <div className="divide-y divide-border border-y border-border">
               {faqs.map(([question, answer]) => (
                 <div key={question} className="grid gap-4 py-8 md:grid-cols-[280px_1fr]">
-                  <h3 className="text-lg font-black uppercase tracking-tighter">
-                    {question}
-                  </h3>
+                  <h3 className="text-lg font-black uppercase tracking-tighter">{question}</h3>
                   <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
                     {answer}
                   </p>

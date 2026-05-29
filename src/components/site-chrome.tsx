@@ -3,6 +3,7 @@ import { Menu, Minus, Plus, Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useCart } from "@/lib/cart";
 import { products, stickerProducts } from "@/lib/catalog";
+import { buildCartOrderMessage, openWhatsApp } from "@/lib/whatsapp";
 import logo from "../assets/logo/kickoff-no-bg-b.png";
 
 export function Nav() {
@@ -437,12 +438,22 @@ export function Nav() {
                   </span>
                   <span className="font-mono text-lg">₹{subtotal}</span>
                 </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsCartOpen(false);
+                    openWhatsApp(buildCartOrderMessage({ itemCount, items, subtotal }));
+                  }}
+                  className="w-full bg-foreground px-6 py-4 text-center text-xs font-bold uppercase tracking-widest text-background transition-colors hover:bg-accent"
+                >
+                  Order On WhatsApp
+                </button>
                 <Link
                   to="/checkout"
                   onClick={() => setIsCartOpen(false)}
-                  className="block w-full bg-foreground px-6 py-4 text-center text-xs font-bold uppercase tracking-widest text-background transition-colors hover:bg-accent"
+                  className="mt-3 block w-full border border-border px-6 py-4 text-center text-xs font-bold uppercase tracking-widest transition-colors hover:border-foreground hover:bg-surface"
                 >
-                  Checkout
+                  Review Order
                 </Link>
                 <button
                   type="button"
